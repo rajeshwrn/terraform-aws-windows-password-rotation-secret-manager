@@ -1,11 +1,12 @@
-# Terraform AWS Windows Password Lambda Rotation
+# Terraform aws windows password rotation secret manager
 When you create an EC2 windows the password will remain the same for the whole life of the machine. It can be rotated automatically with this module
 will supports latest python, AWS provider and terraform
 
 This module is a dependencie of https://github.com/rajeshwrn/terraform-aws-windows-password-lambda-rotation
 
-Thanks @giuseppeborgese
-It is the enhanced version of giuseppeborgese/terraform-aws-windows-password-rotation-secret-manager and giuseppeborgese/terraform-aws-windows-password-lambda-rotation
+Thanks  <a href="https://github.com/giuseppeborgese">@giuseppeborgese</a>
+
+It is the enhanced version of <a href="https://github.com/giuseppeborgese/terraform-aws-windows-password-rotation-secret-manager">giuseppeborgese/terraform-aws-windows-password-rotation-secret-manager</a> and <a href="https://github.com/giuseppeborgese/terraform-aws-windows-password-lambda-rotation">giuseppeborgese/terraform-aws-windows-password-lambda-rotation</a>
 
 ## Prerequisites
 
@@ -24,7 +25,7 @@ Create one lambda function for each region you are working on. Using this code
 
 ``` hcl
 module "windows-password-lambda-rotation" {
-  source  = "rajeshwrn/terraform-aws-windows-password-lambda-rotation/"
+  source  = "github.com/rajeshwrn/terraform-aws-windows-password-lambda-rotation/"
   prefix  = "raj"
 }
 ```
@@ -38,7 +39,7 @@ aws ssm send-command --instance-ids i-xxxxxxxxx --document-name AWS-RunPowerShel
 
 ``` hcl
 module "windows-password-rotation-secret-manager" {
-  source  = "rajeshwrn/terraform-aws-windows-password-rotation-secret-manager"
+  source  = "github.com/rajeshwrn/terraform-aws-windows-password-rotation-secret-manager"
   secret_name_prefix = "vault_"
   instanceid = "i-xxxxxx"
   rotation_lambda_arn = "${module.windows-password-lambda-rotation.lambda_arn}"
